@@ -8,17 +8,13 @@ const Page = () => {
 
     const searchRef = React.createRef();
 
-    const categoryHandler = (value) => { 
-        setCategory(value);
-    }
-
     const changeSearch = (value) => { 
         setSearchQuery(value);
     }
 
     return (
         <div>
-            <Navbar category={categoryHandler} />
+            <Navbar category={(v) => setCategory()} />
             <SearchBar searchQuery={changeSearch} searchRef={searchRef} />
         </div>
     );
