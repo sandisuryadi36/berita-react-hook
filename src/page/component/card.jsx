@@ -5,7 +5,12 @@ const Card = (props) => {
             <div className="card">
                 <img className="card-img-top"
                     src={props.urlToImage}
-                    alt="" />
+                    alt={props.title}
+                    onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src = "https://klubanet.files.wordpress.com/2015/05/blank-thumbnail.jpg"
+                    }}
+                />
                 <div className="card-body">
                     <p className="card-text"><small className="text-muted">Source: {props.source}</small></p>
                     <h4 className="card-title"><a href={props.url} target="_blank" rel="noreferrer">{props.title}</a></h4>

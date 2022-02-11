@@ -2,6 +2,7 @@ import Navbar from "./component/navbar";
 import React, {useState} from "react";
 import SearchBar from "./component/searchbar";
 import Content from "./component/content";
+import Footer from "./component/footer";
 
 const Page = () => { 
     let [category, setCategory] = useState("general");
@@ -23,6 +24,10 @@ const Page = () => {
         setPage(1);
     }
 
+    const changePage = (page) => { 
+        setPage(page);
+    }
+
     return (
         <div>
             <Navbar category={categoryHandler} />
@@ -32,7 +37,9 @@ const Page = () => {
                 searchQuery={searchQuery}
                 page={page}
                 lang={lang}
+                changePage={changePage}
             />
+            <Footer />
         </div>
     );
 }

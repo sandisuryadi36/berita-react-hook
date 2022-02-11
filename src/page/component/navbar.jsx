@@ -1,4 +1,39 @@
-const Navbar = (props) => { 
+import { useState } from "react";
+
+const Navbar = (props) => {
+    let [category, setCategory] = useState("general");
+    let categotyList = [
+        "general",
+        "business",
+        "entertainment",
+        "health",
+        "science",
+        "sports",
+        "technology"
+    ]
+
+    const categoryHandler = (category) => {
+        setCategory(category);
+        props.category(category);
+    }
+
+    const ShowMenuList = () => {
+        let element = categotyList.map((item, index) => {
+            if (item === category) {
+                return (
+                    <li key={index} className="nav-item" onClick={() => categoryHandler(item)}>
+                        <a className="nav-link active" href={`#${item}`}>{item.charAt(0).toUpperCase() + item.slice(1)}</a>
+                    </li>
+                )
+            } else { 
+                return (<li key={index} className="nav-item" onClick={() => categoryHandler(item)}>
+                    <a className="nav-link" href={`#${item}`}>{item.charAt(0).toUpperCase() + item.slice(1)}</a>
+                </li>)
+            }
+        })
+        return element
+    }
+
     return (
         <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
             <div className="container">
@@ -10,27 +45,7 @@ const Navbar = (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
                     <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#general" onClick={() => props.category("general")} >General</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#business" onClick={() => props.category("business")} >Business</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#entertainment" onClick={() => props.category("entertainment")} >Entertainment</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#health" onClick={() => props.category("health")} >Health</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#science" onClick={() => props.category("science")} >Science</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#sports" onClick={() => props.category("sports")} >Sports</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#technology" onClick={() => props.category("technology")} >Technology</a>
-                        </li>
+                        <ShowMenuList />
                     </ul>
                 </div>
             </div>
